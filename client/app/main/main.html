@@ -1,0 +1,77 @@
+<div class="container">
+  <h1>Ashley Madison Friends Finder</h1>
+  <h4 class="slogan">Find which of your Facebook friends are on AM</h4>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>First we need to get your all your friend's email addresses.</p>
+      <p>Unfotunately, Facebook won't let us using their API.</p>
+      <p>Luckily, we can import them to your Yahoo Mail and scrape them from there easily.</p>
+      <h4>How to</h4>
+      <div class="tutorial-container">
+        <p>So first, lets set up a Yahoo Mail account</p>
+        <ol>
+          <li>
+            <div class="tut-text">Go to <a href="//yahoo.com" target="_blank">yahoo.com</a> and click on "Mail".</div>
+            <img class="tut-img" src="/assets/images/tutorial/1.png">
+          </li>
+          <li>
+            <div class="tut-text">Click "Create Account".</div>
+            <img class="tut-img" src="/assets/images/tutorial/2.png">
+          </li>
+          <li>
+            <div class="tut-text">Enter some gibberish.</div>
+            <img class="tut-img" src="/assets/images/tutorial/3.png">
+          </li>
+          <li>
+            <div class="tut-text">Good luck with that.</div>
+            <img class="tut-img" src="/assets/images/tutorial/4.png">
+          </li>
+          <li>
+            <div class="tut-text">Yey!</div>
+            <img class="tut-img" src="/assets/images/tutorial/5.png">
+          </li>
+          <li>
+            <div class="tut-text">Click on the "Facebook" button to import your FB contacts.<br/>Facebook will open a new window asking your approval.</div>
+            <img class="tut-img" src="/assets/images/tutorial/6.png">
+          </li>
+          <li>
+            <div class="tut-text">Yey!</div>
+            <img class="tut-img" src="/assets/images/tutorial/7.png">
+          </li>
+          <li>
+            <div class="tut-text">Inside your Yahoo account, click the Contacts icon to visit your Contacts page</div>
+            <img class="tut-img" src="/assets/images/tutorial/8.png">
+          </li>
+          <li>
+            <div class="tut-text">Use this bookmarklet <a class="bookmarklet" href="javascript:(function () {function toArray(list) {return Array.prototype.slice.call(list);}var frame = toArray(document.querySelectorAll('iframe')).filter(function (item) {return item.src.indexOf('/yab-fe/mu/MainView') > -1;})[0];var emails = toArray(frame.contentWindow.document.querySelectorAll('.subj.contact-detail')).map(function (item) {return {name: item.previousElementSibling.innerText,email: item.innerText};}).filter(function (item) {return item.email;}).map(function (item) {return item.name + ', ' + item.email;}).join('\n');window.open('about:blank','_blank','width=500,height=520,resizable=1').document.write('<style>body { font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif } </style>' + '<h3>Copy the text below and paste it back in amfbfind.xyz</h3>' + '<textarea id=\'emails\' style=\'position:absolute; left: 1%; width: 98%;' + 'top: 35px; bottom: 5px; font-family: monospace;font-size: 12px;\'>' +emails + '</textarea>' + '<script>' + 'var emails = document.querySelector(\'textarea\');' + 'emails.setSelectionRange(0, emails.value.length)' + '</script>');console.log(emails);}());">Scrape Yahoo Emails</a> to scrape all your contacts from Yahoo.<br/>To use this bookmarklet you wil need to drag it to your bookmarks bar, then go back to you Yahoo tab and click on the bookmarklet.</div>
+            <img class="tut-img" src="/assets/images/tutorial/9.png">
+          </li>
+          <li>
+            <div class="tut-text">A popup will open listing all your friends names and email addresses, copy that list and paste it below.</div>
+            <img class="tut-img" src="/assets/images/tutorial/10.png">
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      Once you've got all the emails your wanna check, paste them all here and click "Start Checking".
+      <textarea ng-model="contactsString"></textarea>
+      <button class="btn btn-primary pull-right" ng-click="startChecking()">Start Checking</button>
+      <div class="clearfix"></div>
+      <div class="contacts">
+        <div class="contact contact-{{ contact.state }}" ng-repeat="contact in contacts">
+          <div class="contact-state">
+            <i class="contact-state-waiting  fa fa-pause"></i>
+            <i class="contact-state-checking fa fa-spinner fa-spin"></i>
+            <i class="contact-state-onlist   fa fa-check"></i>
+            <i class="contact-state-offlist  fa fa-times"></i>
+          </div>
+          <div>
+            <span class="contact-name">{{ contact.name }}</span>
+            <span class="contact-email">({{ contact.email }})</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
